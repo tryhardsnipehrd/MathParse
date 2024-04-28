@@ -5,3 +5,4 @@
 using namespace std;
 
 string ParseMathExpression( string expression );
+bool isValidExpression( string expression );
