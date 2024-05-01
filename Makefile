@@ -10,4 +10,5 @@ build/functions.o: src/functions.cpp
 	${CXX} ${CXXFLAGS} -c src/functions.cpp -o $@
 
 build/:
+	@echo "Could not find ./build, creating it now"
 	mkdir build

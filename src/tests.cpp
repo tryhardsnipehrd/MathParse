@@ -44,10 +44,83 @@ TEST_CASE( "isValidExpression - Non-Matched parenthesis" )
 
 TEST_CASE( "isValidExpression - Multi-Layered Parenthesis" )
 {
-    string exp = "100*(10+3)/(3**3(6))";
+    string exp = "100*(10+3)/(3^3(6))";
     bool isValidExp;
 
     isValidExp = isValidExpression( exp );
 
     REQUIRE( isValidExp == true );
+};
+
+TEST_CASE( "isValidExpression - Addition at end of string" )
+{
+    string exp = "1+";
+    bool isValidExp;
+
+    isValidExp = isValidExpression( exp );
+    
+    REQUIRE( isValidExp == false );
+};
+
+TEST_CASE( "isValidExpression - Addition at beginning of string" )
+{
+    string exp = "+1";
+    bool isValidExp;
+
+    isValidExp = isValidExpression( exp );
+
+    REQUIRE( isValidExp == false );
+};
+
+TEST_CASE( "isValidExpression - Two + in a row" )
+{
+    string exp = "1++3";
+    bool isValidExp;
+
+    isValidExp = isValidExpression( exp );
+
+    REQUIRE( isValidExp == false );
+};
+
+TEST_CASE( "isValidExpression - Subtraction at end of string" )
+{
+    string exp = "1-";
+    bool isValidExp;
+
+    isValidExp = isValidExpression( exp );
+
+    REQUIRE( isValidExp == false );
+};
+
+TEST_CASE( "isValidExpression - Subtraction at beginning of string" )
+{
+    string exp = "-1";
+    bool isValidExp;
+
+    isValidExp = isValidExpression( exp );
+
+    REQUIRE( isValidExp == true );
+};
+
+TEST_CASE( "isValidExpression - Two - in a row" )
+{
+    string exp = "1--3";
+    bool isValidExp;
+
+    isValidExp = isValidExpression( exp );
+
+    REQUIRE( isValidExp == false );
+};
+
+TEST_CASE( "generateTokens - simple 1+1" )
+{
+    vector<int[2]> tokens;
+    string exp = "1+1";
+
+    generateTokens( tokens, exp );
+
+    REQUIRE( tokens.at(0)[0] == 0 );
+    REQUIRE( tokens.at(0)[1] == 1 );
+    REQUIRE( tokens.at(1)[0] == 1 );
+    REQUIRE( tokens.at(1)[1] == 1 );
 };
