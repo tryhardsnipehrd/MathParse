@@ -114,13 +114,26 @@ TEST_CASE( "isValidExpression - Two - in a row" )
 
 TEST_CASE( "generateTokens - simple 1+1" )
 {
-    vector<int[2]> tokens;
+    vector<Token> tokens;
     string exp = "1+1";
 
     generateTokens( tokens, exp );
 
-    REQUIRE( tokens.at(0)[0] == 0 );
-    REQUIRE( tokens.at(0)[1] == 1 );
-    REQUIRE( tokens.at(1)[0] == 1 );
-    REQUIRE( tokens.at(1)[1] == 1 );
+    REQUIRE( tokens.at(0).type == 0 );
+    REQUIRE( tokens.at(0).value == 1 );
+    REQUIRE( tokens.at(1).type == 1 );
+    REQUIRE( tokens.at(1).value == 0 );
+};
+
+TEST_CASE( "generateTokens - simple 1-1" )
+{
+    vector<Token> tokens;
+    string exp = "1-1";
+
+    generateTokens( tokens, exp );
+
+    REQUIRE( tokens.at(1).type == 1 );
+    REQUIRE( tokens.at(1).value == 1 );
+    REQUIRE( tokens.at(2).type == 0 );
+    REQUIRE( tokens.at(2).value == 1 );
 };

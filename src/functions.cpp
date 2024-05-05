@@ -1,11 +1,11 @@
 #include "MathParse.h"
 
-string ParseMathExpression( string expression )
+string ParseMathExpression( const string expression )
 {
     return expression;
 }
 
-bool isValidExpression( string expression )
+bool isValidExpression( const string expression )
 {
     int parenCount = 0;
     bool isValid = true;
@@ -53,17 +53,27 @@ bool isValidExpression( string expression )
     return isValid;
 }
 
-void generateTokens( vector<int[2]> &tokens, string expression )
+void generateTokens( vector<Token> &tokens, const string expression )
 {
     int size = expression.size();
-    int token[2];
+    Token token;
     
     for( int i=0; i < size; i++ )
     {
         if ( isdigit( expression.at( i ) ) )
         {
-            token[0] = 0;
-            token[1] = stoi( expression.substr( i, 1 ) );
+            token.type = 0;
+            token.value = stoi( expression.substr( i, 1 ) );
+            tokens.push_back( token );
+        } else if ( expression.at( i ) == '+' )
+        {
+            token.type = 1;
+            token.value = 0;
+            tokens.push_back( token );
+        } else if ( expression.at( i ) == '-' )
+        {
+            token.type = 1;
+            token.value = 1;
             tokens.push_back( token );
         }
     }

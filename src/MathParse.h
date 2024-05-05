@@ -6,6 +6,11 @@
 
 using namespace std;
 
-string ParseMathExpression( string expression );
-bool isValidExpression( string expression );
-void generateTokens( vector<int[2]> &tokens, string expression );
+struct Token {
+    int type;
+    int value;
+};
+
+string ParseMathExpression( const string expression );
+bool isValidExpression( const string expression );
+void generateTokens( vector<Token> &tokens, const string expression );
