@@ -1,4 +1,4 @@
 #!/bin/bash
 
-make
+make -j 8
 ./build/MathParse_test
